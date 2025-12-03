@@ -1,5 +1,7 @@
 # FY26-MS-Workshop
 
+> 💡 **Project Goal**: Through this project, you will gain a deep understanding of **Azure Static Web Apps** deployment process and learn how to leverage **GitHub Copilot** to boost your development efficiency!
+
 ## Personal CV Static Website
 
 A modern, responsive personal CV website built with HTML, CSS, and JavaScript. This project demonstrates a clean, professional portfolio that can be easily deployed to Azure Static Web Apps.
@@ -27,6 +29,8 @@ A modern, responsive personal CV website built with HTML, CSS, and JavaScript. T
 ```
 
 ## 🚀 Quick Start
+
+> 💬 **Tip**: If you encounter any issues during development or deployment, make good use of **GitHub Copilot** to help you solve them! Whether it's code problems, deployment challenges, or feature suggestions, Copilot can provide instant assistance.
 
 ### Local Development
 
@@ -79,65 +83,3 @@ This website is designed to be easily deployed to Azure Static Web Apps. Follow 
 2. Create a new Static Web App
 3. Connect your GitHub repository
 4. Azure will automatically build and deploy your site!
-
-**Deployment is free** - Azure Static Web Apps offers a generous free tier perfect for personal CV websites.
-
-## 🎨 Customization Guide
-
-### Changing Colors
-
-The website uses CSS variables for easy theming. Update these in `css/style.css`:
-
-```css
-:root {
-    --primary-color: #2563eb;     /* Main accent color */
-    --secondary-color: #1e40af;   /* Secondary accent */
-    --text-primary: #1f2937;      /* Main text color */
-    --text-secondary: #6b7280;    /* Secondary text */
-    /* ... more variables ... */
-}
-```
-
-### Adding Sections
-
-To add new sections to your CV:
-
-1. Add HTML in `index.html` following the existing section structure
-2. Use the `.section` class for consistent styling
-3. Add any specific styles in `css/style.css`
-
-### Modifying Layout
-
-The site uses CSS Grid and Flexbox for layout. Key breakpoint:
-- Mobile: `@media (max-width: 768px)` in `css/style.css`
-
-## 🛠️ Technologies Used
-
-- **HTML5**: Semantic markup
-- **CSS3**: Modern styling with variables, grid, and flexbox
-- **JavaScript (Vanilla)**: No frameworks - pure JS for performance
-- **Azure Static Web Apps**: Hosting and deployment
-
-## 📱 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## 📝 License
-
-This project is open source and available for personal and commercial use.
-
-## 🤝 Contributing
-
-Feel free to fork this project and customize it for your own use. If you have suggestions for improvements, please open an issue or submit a pull request.
-
-## 📞 Support
-
-For deployment help, see [AZURE_DEPLOYMENT.md](AZURE_DEPLOYMENT.md)
-
----
-
-**Built with ❤️ for developers seeking a professional online presence**
