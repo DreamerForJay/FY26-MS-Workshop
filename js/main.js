@@ -2,35 +2,85 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // TODO: Implement Dark Mode Toggle
-    // 1. Get the theme toggle button: document.getElementById('theme-toggle')
-    // 2. Add click event listener to the button
-    // 3. Toggle 'dark-mode' class on body element
-    // 4. Save theme preference to localStorage
-    // 5. Load saved theme when page loads
-    // 6. Update button text based on current theme (🌙 Dark Mode / ☀️ Light Mode)
-    // Hint: Use body.classList.toggle('dark-mode') and localStorage.setItem/getItem
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
     
-    // TODO: Add smooth scrolling for anchor links
-    // Hint: Use querySelectorAll for links starting with '#'
-    // Hint: Use element.scrollIntoView({ behavior: 'smooth' })
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggle.textContent = '☀️ Light Mode';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+        
+        showNotification(isDark ? 'Dark mode enabled' : 'Light mode enabled');
+    });
     
-    // TODO: Add scroll animations to sections
-    // Hint: Use IntersectionObserver API to detect when sections enter viewport
-    // Hint: Add/remove CSS classes or modify styles when sections become visible
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
     
-    // TODO: Add click-to-copy functionality for email
-    // Hint: Use navigator.clipboard.writeText() to copy text
-    // Hint: Show a notification after copying
+    // Scroll animations using IntersectionObserver
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeIn 0.8s ease forwards';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+        section.style.opacity = '0';
+        observer.observe(section);
+    });
     
-    // TODO: Add hover effects to skill tags
-    // Hint: Use mouseenter and mouseleave events
-    // Hint: Modify styles or add CSS classes on hover
-    
-    // TODO: Add a function to show notifications
-    // Hint: Create a div element dynamically
-    // Hint: Style it with position: fixed and add fade in/out animations
-    // Hint: Use setTimeout to remove the notification after a few seconds
+    // Function to show notifications
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        
+        // Add styles dynamically or through CSS
+        Object.assign(notification.style, {
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            backgroundColor: 'var(--primary-color)',
+            color: 'white',
+            padding: '12px 24px',
+            borderRadius: '8px',
+            boxShadow: 'var(--shadow-lg)',
+            zIndex: '1000',
+            transition: 'opacity 0.3s ease'
+        });
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
     
     console.log('CV website loaded successfully!');
 });
