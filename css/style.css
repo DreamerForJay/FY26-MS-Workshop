@@ -320,6 +320,12 @@ body {
     margin: 0;
 }
 
+.footer-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
 /* Theme Toggle Button */
 .theme-toggle {
     background-color: var(--primary-color);
