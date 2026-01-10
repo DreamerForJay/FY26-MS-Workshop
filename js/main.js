@@ -35,6 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
             "t-edu1-desc": "學術表現優秀，大一下學期 GPA 94.04 (班排 3)、大二下學期 GPA 94.44 (班排 2)。積極參與社群與技術活動。",
 
             "t-lead-title": "活動與社群領導",
+            "t-lead4-role": "資訊工程學系學會｜活動組",
+            "t-lead4-time": "2025/09 - 至今",
+            "t-lead4-comp": "國立彰化師範大學 (NCUE)",
+            "t-lead4-list": "<li>協助規劃與執行系學會大型活動。</li><li>負責活動現場協調與支援。</li>",
+
             "t-lead1-role": "設備管理幹部",
             "t-lead1-time": "2025/02 - 至今",
             "t-lead1-comp": "NCUE 資訊社 (NCUEITC)",
@@ -98,6 +103,11 @@ document.addEventListener('DOMContentLoaded', function() {
             "t-edu1-desc": "Academic Performance: Freshman Spring GPA 94.04 (Rank 3), Sophomore Spring GPA 94.44 (Rank 2). Actively participated in community and technical activities.",
 
             "t-lead-title": "Activities & Leadership",
+            "t-lead4-role": "Event Planning Committee",
+            "t-lead4-time": "Sep 2025 - Present",
+            "t-lead4-comp": "NCUE CSIE Student Association",
+            "t-lead4-list": "<li>Assisted in planning and executing large-scale department events.</li><li>Responsible for on-site coordination and event support.</li>",
+
             "t-lead1-role": "Equipment Manager",
             "t-lead1-time": "Feb 2025 - Present",
             "t-lead1-comp": "NCUE IT Club (NCUEITC)",
