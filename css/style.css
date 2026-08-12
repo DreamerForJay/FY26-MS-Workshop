@@ -351,7 +351,7 @@ body {
 
 /* Responsive Design */
 .perxona-section {
-    min-height: 640px;
+    height: 640px;
     padding: 0;
     overflow: hidden;
 }
@@ -364,7 +364,7 @@ body {
 
 @media (max-width: 768px) {
     .perxona-section {
-        min-height: 520px;
+        height: 520px;
     }
 
     .perxona-section sv-agent {
