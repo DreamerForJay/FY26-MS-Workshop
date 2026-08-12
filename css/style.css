@@ -350,7 +350,26 @@ body {
 }
 
 /* Responsive Design */
+.perxona-section {
+    min-height: 640px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.perxona-section sv-agent {
+    display: block;
+    width: 100%;
+    height: 640px;
+}
+
 @media (max-width: 768px) {
+    .perxona-section {
+        min-height: 520px;
+    }
+
+    .perxona-section sv-agent {
+        height: 520px;
+    }
     .container {
         padding: 10px;
     }
