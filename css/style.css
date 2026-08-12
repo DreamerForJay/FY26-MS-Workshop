@@ -64,7 +64,7 @@ body {
     margin-bottom: 30px;
     flex-wrap: wrap;
     gap: 30px;
-    padding-right: 300px;
+    padding-right: 180px;
 }
 
 .profile-image {
@@ -124,26 +124,24 @@ body {
     position: relative;
 }
 
-.digital-card {
+.qr-code {
     position: absolute;
     top: 24px;
     right: 24px;
-    width: 280px;
-    display: block;
+    width: 150px;
+    aspect-ratio: 1;
+    padding: 8px;
+    background: #fff;
     border-radius: 12px;
-    overflow: hidden;
     box-shadow: var(--shadow-lg);
-    transition: transform 0.2s ease;
 }
 
-.digital-card:hover {
-    transform: translateY(-3px);
-}
-
-.digital-card img {
+.qr-code img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
 }
 
 .contact-item a {
@@ -414,10 +412,9 @@ body {
         padding: 25px;
     }
 
-    .digital-card {
+    .qr-code {
         position: static;
-        width: 100%;
-        max-width: 420px;
+        width: 160px;
         margin: 0 auto 24px;
     }
     
