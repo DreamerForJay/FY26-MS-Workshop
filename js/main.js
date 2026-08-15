@@ -21,8 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
       exp4Meta:"實習 · 中國福建 · 現場",exp4a:"加入多語系顯示器翻譯自動化測試專案。",exp4b:"協助 Python 測試腳本、測試報告、UI／功能／回歸測試與 Bug Tracking。",
       exp5a:"執行系統流程與穩定性測試，整理問題並協助技術展示。",exp5b:"參與 AI Expo Taiwan 2025 與 COMPUTEX 現場推廣。",
       educationTitle:"國立彰化師範大學",educationMajor:"資訊工程學系 · 2023 — 2027（預計）",educationBody:"以軟體工程、AI 應用與實作為核心，持續透過企業實習和專案驗證所學。",
-      project1:"智慧記憶吊墜，整合 AI 語音互動、微型投影、光線引導與 GPS 安全功能；獲 2025 康寧創星家競賽優等獎。",
-      project2:"運用資料分析、溫和提醒與內容轉向改善數位使用習慣，入選 AI Junior Award 2025。",
+      workTitle:"從概念、研究到可被體驗的成果。",workIntro:"每個專案都從真實問題出發，結合技術、敘事與使用者體驗。",kinsunDesc:"智慧長照 AI 陪伴系統：以在地語言、記憶確認、安全評估與協作開發，打造更有溫度的日常陪伴。",detoxTitle:"數位防腐劑",
+      project1:"智慧記憶項鍊，整合 AI 語音、3D 投影、光導感測與 GPS；負責產品敘事、體驗流程與技術研究，獲 2025 康寧創星家優等獎。",
+      project2:"擔任組長，以 AI 使用分析、溫和提醒與注意力轉移三階段方法，協助使用者改善「腦腐」與碎片內容成癮。",
       project3:"世界青少年發明展臺灣選拔銅牌，展現團隊協作、創意與動手實作能力。",
       avatarTitle:"和我的 AI 分身聊聊",avatarBody:"透過 Perxona 互動式 AI Avatar，快速了解我的經歷與作品。",
       qrTitle:"掃描查看所有聯絡方式",qrBody:"用手機相機掃描，或直接點下方連結。"
@@ -41,8 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
       exp4Meta:"Internship · Fujian, China · On-site",exp4a:"Joined an automated testing project for multilingual monitor translation.",exp4b:"Assisted with Python test scripts, reports, UI, functional, regression testing, and bug tracking.",
       exp5a:"Tested system workflows and stability, documented issues, and supported technical demonstrations.",exp5b:"Supported on-site promotion at AI Expo Taiwan 2025 and COMPUTEX.",
       educationTitle:"National Changhua University of Education",educationMajor:"B.S. in Computer Science · 2023 — 2027 (Expected)",educationBody:"Focused on software engineering, applied AI, and hands-on implementation, with industry internships and projects used to validate learning.",
-      project1:"A smart memory pendant combining AI voice interaction, micro-projection, light guidance, and GPS safety features; Excellence Award at the 2025 Corning Innovation Competition.",
-      project2:"A project using data analysis, gentle reminders, and content redirection to improve digital habits; selected for AI Junior Award 2025.",
+      workTitle:"From concept and research to experiences people can use.",workIntro:"Each project starts with a real problem and connects technology, storytelling, and user experience.",kinsunDesc:"An AI companion for long-term care, combining local-language interaction, memory confirmation, safety evaluation, and collaborative development.",detoxTitle:"Digital Preservative",
+      project1:"A smart memory necklace combining AI voice, 3D projection, light-guided sensing, and GPS. I led product storytelling, experience flow, and technical research; Excellence Award at the 2025 Corning Innovation Competition.",
+      project2:"As team leader, I developed a three-stage approach using AI usage analysis, gentle nudges, and attention redirection to address brain rot and fragmented-content addiction.",
       project3:"Bronze Medal at the Taiwan selection of the International Exhibition for Young Inventors, demonstrating teamwork, creativity, and hands-on innovation.",
       avatarTitle:"Talk with my AI avatar",avatarBody:"Use the interactive Perxona AI avatar to explore my experience and selected work.",
       qrTitle:"Scan to see every contact",qrBody:"Scan with your phone camera, or open the link below."
