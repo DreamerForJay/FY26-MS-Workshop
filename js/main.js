@@ -1,167 +1,95 @@
-// Main JavaScript file for CV website
+document.addEventListener("DOMContentLoaded", () => {
+  const root = document.documentElement;
+  const themeToggle = document.querySelector("#theme-toggle");
+  const langToggle = document.querySelector("#lang-toggle");
+  const qrDialog = document.querySelector("#qr-dialog");
+  const qrOpeners = document.querySelectorAll("#qr-toggle, [data-open-qr]");
+  const qrClose = qrDialog.querySelector(".dialog-close");
 
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Translation Data
-    const translations = {
-        zh: {
-            "t-name": "楊杰倫 (Chieh-Lun Yang)",
-            "t-title": "彰師大資工系學生｜TMYTEK",
-            "t-tagline": "熱愛技術實作、AI 應用與跨域協作，持續把想法做成可被使用的產品。",
-            "t-location": "桃園市楊梅區",
-            "t-resume-link": "下載最新履歷 PDF",
-            "t-about-title": "關於我",
-            "t-about-desc": "我是一位富有創意、熱愛學習與分享的資工學生，具備成長型思維、團隊溝通與活動執行經驗。關注 AI、軟體測試、產品應用及跨域創新，期待透過實務專案持續累積技術並為團隊創造價值。",
-            "t-exp-title": "工作經歷",
-            "t-exp1-role": "研發實習生", "t-exp1-time": "2026/07 - 至今", "t-exp1-comp": "稜研科技股份有限公司 (TMY Technology Inc. / TMYTEK)",
-            "t-exp1-list": "<li>於新竹、板橋據點參與研發實習與現場協作。</li><li>投入毫米波與通訊技術相關產品及研發工作。</li>",
-            "t-exp2-role": "Future Talent Program Associate", "t-exp2-time": "2026/03 - 2026/08", "t-exp2-comp": "鴻海精密工業股份有限公司",
-            "t-exp2-list": "<li>負責 AI、自動化與產業趨勢內容，協助提升校園對鴻海科技布局的認知。</li><li>協助校園活動、科技展覽與招募活動的執行與流程規劃。</li><li>蒐集學生對科技議題與職涯發展的回饋，支援內容與活動策略。</li>",
-            "t-exp3-role": "校園大使", "t-exp3-time": "2025/07 - 2026/06", "t-exp3-comp": "104 人力銀行",
-            "t-exp3-list": "<li>推廣校園職涯資源、實習與打工機會及職涯活動。</li><li>參與全國實習打工競賽評分規劃，活動收到 600+ 件作品。</li><li>擔任彰師大職涯體驗課程助教，協調企業講師、時程與課程資訊。</li>",
-            "t-exp4-role": "資訊科技實習生", "t-exp4-time": "2025/07 - 2025/08", "t-exp4-comp": "冠捷科技有限公司 (TPV Technology)",
-            "t-exp4-list": "<li>參與多語系顯示器翻譯自動化測試專案。</li><li>以 Python 協助測試腳本與測試報告彙整。</li><li>執行多語系介面、功能、回歸、異常情境測試及 Bug Tracking。</li>",
-            "t-exp5-role": "校園大使｜技術組", "t-exp5-time": "2024/12 - 2025/06", "t-exp5-comp": "Glows.ai",
-            "t-exp5-list": "<li>協助測試系統運作流程與穩定性。</li><li>支援 2025 AI Expo、COMPUTEX 等展覽的現場技術展示與溝通。</li>",
-            "t-edu-title": "教育背景", "t-edu1-dept": "資訊工程學系", "t-edu1-time": "2023/09 - 2027/06（預計）", "t-edu1-school": "國立彰化師範大學 (NCUE)",
-            "t-edu1-desc": "大一上 91.53（系排 5）、大一下 94.04（系排 3）、大二上 91.33（系排 5）、大二下 94.44（系排 2）。",
-            "t-lead-title": "活動與領導經驗", "t-lead4-role": "活動組", "t-lead4-time": "2025/09 - 至今", "t-lead4-comp": "彰師大資工系學會", "t-lead4-list": "<li>協助規劃與執行系上大型活動。</li><li>負責活動現場協調與支援。</li>",
-            "t-lead1-role": "器材組組長", "t-lead1-time": "2025/02 - 至今", "t-lead1-comp": "NCUE 資訊研究社 (NCUEITC)", "t-lead1-list": "<li>管理社團器材並提供技術支援。</li><li>協助辦理程式工作坊與技術交流活動。</li>",
-            "t-lead2-role": "社群成員", "t-lead2-time": "2023/09 - 2025/02", "t-lead2-comp": "GDSC / GDG / 投資研習社", "t-lead2-list": "<li>參與 GDSC 聯合技術交流、DevFest Taipei 2024、SITCON 2025 與 COMPUTEX。</li><li>投入開源、前端與創新技術應用。</li>",
-            "t-lead3-role": "副會長暨公關", "t-lead3-time": "2025/06 - 至今", "t-lead3-comp": "彰師大轉學生聯誼會", "t-lead3-list": "<li>參與轉學生社群核心營運。</li><li>負責對外溝通、活動宣傳與社群經營。</li>",
-            "t-skill-title": "技能與專長", "t-skill-prog": "程式語言", "t-skill-tool": "工具與平台", "t-skill-soft": "軟實力", "t-skill-s1": "團隊溝通", "t-skill-s2": "活動協調", "t-skill-s3": "自主學習", "t-skill-s4": "社群經營",
-            "t-proj-title": "精選專案與獎項", "t-proj1-title": "Merlance 智慧記憶項鍊", "t-proj1-desc": "2025 康寧創星家創新應用競賽優等獎。整合 AI 語音互動、微型投影、光引導與 GPS 安全功能，為長者打造兼具情感陪伴與生活安全的穿戴裝置。",
-            "t-proj2-title": "Digital Detoxifier 數位戒斷方案", "t-proj2-desc": "AI Junior Award 2025。以使用分析、溫和提醒與內容轉移三階段設計，改善碎片化內容與數位成癮問題。",
-            "t-proj3-title": "IEYI 世界青少年創客發明展", "t-proj3-desc": "2022 台灣區銅牌獎，展現團隊合作、創意思考與實作能力。"
-        },
-        en: {
-            "t-name": "Chieh-Lun Yang", "t-title": "NCUE CSIE Student | TMYTEK", "t-tagline": "Turning ideas in AI, software, and cross-domain collaboration into practical products.", "t-location": "Yangmei, Taoyuan, Taiwan", "t-resume-link": "Download latest resume (PDF)",
-            "t-about-title": "About Me", "t-about-desc": "I am a creative computer science student who enjoys learning, sharing knowledge, and building practical solutions. My interests include AI applications, software testing, product development, and cross-domain innovation. I bring a growth mindset, clear communication, and hands-on project experience to every team.",
-            "t-exp-title": "Work Experience",
-            "t-exp1-role": "Research & Development Intern", "t-exp1-time": "Jul 2026 - Present", "t-exp1-comp": "TMY Technology Inc. (TMYTEK)", "t-exp1-list": "<li>Participate in on-site R&D collaboration across the Hsinchu and Banqiao offices.</li><li>Contribute to products and research involving millimeter-wave and communications technologies.</li>",
-            "t-exp2-role": "Future Talent Program Associate", "t-exp2-time": "Mar 2026 - Aug 2026", "t-exp2-comp": "Hon Hai Precision Industry Co., Ltd. (Foxconn)", "t-exp2-list": "<li>Create content on AI, automation, and industry trends.</li><li>Support campus events, technology exhibitions, and recruiting activities.</li><li>Gather student feedback to inform future content and event strategy.</li>",
-            "t-exp3-role": "Campus Ambassador", "t-exp3-time": "Jul 2025 - Jun 2026", "t-exp3-comp": "104 Corporation", "t-exp3-list": "<li>Promoted campus career resources, internships, part-time opportunities, and career initiatives.</li><li>Helped plan scoring criteria for a nationwide competition with 600+ submissions.</li><li>Coordinated enterprise speakers, schedules, and course information as a career-program teaching assistant.</li>",
-            "t-exp4-role": "Information Technology Intern", "t-exp4-time": "Jul 2025 - Aug 2025", "t-exp4-comp": "TPV Technology", "t-exp4-list": "<li>Joined an automated testing project for multilingual monitor translation.</li><li>Assisted with Python-based testing scripts and compiled test reports.</li><li>Performed UI, functional, regression, exception-scenario testing, and bug tracking.</li>",
-            "t-exp5-role": "Campus Ambassador - Technical Team", "t-exp5-time": "Dec 2024 - Jun 2025", "t-exp5-comp": "Glows.ai", "t-exp5-list": "<li>Tested system workflows and stability.</li><li>Supported technical demonstrations at AI Expo Taiwan 2025 and COMPUTEX.</li>",
-            "t-edu-title": "Education", "t-edu1-dept": "Computer Science and Information Engineering", "t-edu1-time": "Sep 2023 - Jun 2027 (Expected)", "t-edu1-school": "National Changhua University of Education", "t-edu1-desc": "Freshman Fall 91.53 (Rank 5), Freshman Spring 94.04 (Rank 3), Sophomore Fall 91.33 (Rank 5), Sophomore Spring 94.44 (Rank 2).",
-            "t-lead-title": "Activities & Leadership", "t-lead4-role": "Event Planning Committee", "t-lead4-time": "Sep 2025 - Present", "t-lead4-comp": "NCUE CSIE Student Association", "t-lead4-list": "<li>Plan and execute department events.</li><li>Coordinate on-site operations and event support.</li>",
-            "t-lead1-role": "Equipment Manager", "t-lead1-time": "Feb 2025 - Present", "t-lead1-comp": "NCUE IT Club", "t-lead1-list": "<li>Manage equipment and provide technical support.</li><li>Support programming workshops and technical exchanges.</li>",
-            "t-lead2-role": "Member", "t-lead2-time": "Sep 2023 - Feb 2025", "t-lead2-comp": "GDSC / GDG / Investment Research Club", "t-lead2-list": "<li>Participated in GDSC exchanges, DevFest Taipei 2024, SITCON 2025, and COMPUTEX.</li><li>Explored open source, frontend development, and innovative applications.</li>",
-            "t-lead3-role": "Vice President & Public Relations", "t-lead3-time": "Jun 2025 - Present", "t-lead3-comp": "NCUE Transfer Students Union", "t-lead3-list": "<li>Help lead the transfer-student community.</li><li>Manage external communication, event promotion, and social media.</li>",
-            "t-skill-title": "Skills & Expertise", "t-skill-prog": "Programming Languages", "t-skill-tool": "Tools & Platforms", "t-skill-soft": "Soft Skills", "t-skill-s1": "Team Communication", "t-skill-s2": "Event Coordination", "t-skill-s3": "Self-directed Learning", "t-skill-s4": "Community Management",
-            "t-proj-title": "Featured Projects & Awards", "t-proj1-title": "Merlance Smart Memory Pendant", "t-proj1-desc": "Excellence Award at the 2025 Corning Innovation Competition. A wearable for older adults combining AI voice interaction, micro-projection, light guidance, and GPS safety features.", "t-proj2-title": "Digital Detoxifier", "t-proj2-desc": "AI Junior Award 2025 project using analysis, gentle reminders, and content redirection to improve digital habits.", "t-proj3-title": "IEYI World Youth Invention Exhibition", "t-proj3-desc": "2022 Taiwan Regional Bronze Medal, demonstrating teamwork, creativity, and hands-on innovation."
-        }
-    };
-
-    // Dark Mode Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        body.classList.add('dark-mode');
-        themeToggle.textContent = '☀️ Light Mode';
+  const translations = {
+    zh: {
+      available:"OPEN TO COLLABORATION · 2026",surname:"楊杰倫",
+      headline:"把 AI、軟體與跨域想法，做成真正能被使用的產品。",
+      intro:"國立彰化師範大學資訊工程學系學生，目前於 TMYTEK 擔任研發實習生。專注 AI 應用、軟體測試、產品開發與技術社群。",
+      viewExperience:"查看經歷 ↓",contactMe:"聯絡我 ↗",
+      aboutTitle:"持續學習，也持續把知識變成影響力。",
+      aboutBody:"我喜歡把模糊的問題拆解成可以執行、測試與迭代的方案。從企業實習、校園大使到社群與競賽，我累積了跨團隊溝通、內容策劃、測試自動化與產品實作經驗。",
+      exp1Role:"Research & Development Intern",exp1Time:"2026 / 07 — 現在",exp1Meta:"實習 · 新竹／板橋 · 現場",
+      exp1a:"參與毫米波與通訊技術相關產品研發，協助跨據點的工程協作。",exp1b:"將研究需求轉換為可驗證的技術任務，持續紀錄測試與迭代結果。",
+      foxconn:"鴻海精密工業",hybrid:"實習 · 混合型",exp2a:"撰寫產業趨勢、AI 與自動化技術內容，讓複雜議題更容易被理解。",exp2b:"協助技術研討會、企業說明會與校園講座，促進學生與企業交流。",exp2c:"蒐集學生對技術議題與職涯發展的回饋，提供活動與人才策略參考。",
+      corp104:"104 人力銀行",careerTeam:"職涯課程組",exp3a:"推廣校園職涯資源、實習與打工機會，負責內容創作與社群經營。",exp3b:"協助全國競賽並審閱超過 600 件作品，參與建立評分標準。",exp3c:"協調企業講師、課程資訊與活動時程，強化產學連結。",
+      exp4Meta:"實習 · 中國福建 · 現場",exp4a:"加入多語系顯示器翻譯自動化測試專案。",exp4b:"協助 Python 測試腳本、測試報告、UI／功能／回歸測試與 Bug Tracking。",
+      exp5a:"執行系統流程與穩定性測試，整理問題並協助技術展示。",exp5b:"參與 AI Expo Taiwan 2025 與 COMPUTEX 現場推廣。",
+      educationTitle:"國立彰化師範大學",educationMajor:"資訊工程學系 · 2023 — 2027（預計）",educationBody:"以軟體工程、AI 應用與實作為核心，持續透過企業實習和專案驗證所學。",
+      project1:"智慧記憶吊墜，整合 AI 語音互動、微型投影、光線引導與 GPS 安全功能；獲 2025 康寧創星家競賽優等獎。",
+      project2:"運用資料分析、溫和提醒與內容轉向改善數位使用習慣，入選 AI Junior Award 2025。",
+      project3:"世界青少年發明展臺灣選拔銅牌，展現團隊協作、創意與動手實作能力。",
+      avatarTitle:"和我的 AI 分身聊聊",avatarBody:"透過 Perxona 互動式 AI Avatar，快速了解我的經歷與作品。",
+      qrTitle:"掃描查看所有聯絡方式",qrBody:"用手機相機掃描，或直接點下方連結。"
+    },
+    en: {
+      available:"OPEN TO COLLABORATION · 2026",surname:"CHIEH-LUN",
+      headline:"Turning ideas in AI, software, and cross-domain collaboration into products people can use.",
+      intro:"Computer Science student at NCUE and Research & Development Intern at TMYTEK, focused on AI applications, software testing, product development, and technical communities.",
+      viewExperience:"View experience ↓",contactMe:"Contact me ↗",
+      aboutTitle:"Always learning — and turning knowledge into impact.",
+      aboutBody:"I enjoy breaking ambiguous problems into solutions that can be built, tested, and improved. Through industry internships, campus programs, communities, and competitions, I have developed experience in cross-team communication, content strategy, test automation, and product implementation.",
+      exp1Role:"Research & Development Intern",exp1Time:"2026 / 07 — PRESENT",exp1Meta:"Internship · Hsinchu / Banqiao · On-site",
+      exp1a:"Contribute to product R&D involving millimeter-wave and communications technologies across engineering sites.",exp1b:"Translate research needs into verifiable technical tasks and document testing and iteration results.",
+      foxconn:"Hon Hai Precision Industry",hybrid:"Internship · Hybrid",exp2a:"Create accessible content on industry trends, AI, and automation.",exp2b:"Support technical seminars, employer events, and campus talks that connect students with industry.",exp2c:"Gather student feedback on technology and career development to inform event and talent strategy.",
+      corp104:"104 Corporation",careerTeam:"Career Program",exp3a:"Promoted campus career resources, internships, and part-time opportunities through content and community operations.",exp3b:"Reviewed more than 600 submissions for a nationwide competition and helped establish scoring criteria.",exp3c:"Coordinated speakers, course information, and event schedules to strengthen industry–academia connections.",
+      exp4Meta:"Internship · Fujian, China · On-site",exp4a:"Joined an automated testing project for multilingual monitor translation.",exp4b:"Assisted with Python test scripts, reports, UI, functional, regression testing, and bug tracking.",
+      exp5a:"Tested system workflows and stability, documented issues, and supported technical demonstrations.",exp5b:"Supported on-site promotion at AI Expo Taiwan 2025 and COMPUTEX.",
+      educationTitle:"National Changhua University of Education",educationMajor:"B.S. in Computer Science · 2023 — 2027 (Expected)",educationBody:"Focused on software engineering, applied AI, and hands-on implementation, with industry internships and projects used to validate learning.",
+      project1:"A smart memory pendant combining AI voice interaction, micro-projection, light guidance, and GPS safety features; Excellence Award at the 2025 Corning Innovation Competition.",
+      project2:"A project using data analysis, gentle reminders, and content redirection to improve digital habits; selected for AI Junior Award 2025.",
+      project3:"Bronze Medal at the Taiwan selection of the International Exhibition for Young Inventors, demonstrating teamwork, creativity, and hands-on innovation.",
+      avatarTitle:"Talk with my AI avatar",avatarBody:"Use the interactive Perxona AI avatar to explore my experience and selected work.",
+      qrTitle:"Scan to see every contact",qrBody:"Scan with your phone camera, or open the link below."
     }
+  };
 
-    themeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        themeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-        
-        showNotification(isDark ? 'Dark mode enabled' : 'Light mode enabled');
+  const savedTheme = localStorage.getItem("portfolio-theme-v2") || "dark";
+  root.dataset.theme = savedTheme;
+  const updateThemeLabel = () => {
+    const dark = root.dataset.theme === "dark";
+    themeToggle.setAttribute("aria-label", dark ? "切換至淺色主題" : "切換至深色主題");
+    document.querySelector('meta[name="theme-color"]').content = dark ? "#090614" : "#f4f2fb";
+  };
+  updateThemeLabel();
+  themeToggle.addEventListener("click", () => {
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+    localStorage.setItem("portfolio-theme-v2", root.dataset.theme);
+    updateThemeLabel();
+  });
+
+  let currentLang = localStorage.getItem("portfolio-lang-v2") || "zh";
+  const setLanguage = (lang) => {
+    currentLang = lang;
+    root.lang = lang === "zh" ? "zh-Hant" : "en";
+    langToggle.textContent = lang === "zh" ? "EN" : "中";
+    langToggle.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切換至中文");
+    document.querySelectorAll("[data-i18n]").forEach((node) => {
+      const value = translations[lang][node.dataset.i18n];
+      if (value) node.textContent = value;
     });
+    localStorage.setItem("portfolio-lang-v2", lang);
+  };
+  setLanguage(currentLang);
+  langToggle.addEventListener("click", () => setLanguage(currentLang === "zh" ? "en" : "zh"));
 
-    // Language Toggle
-    const langToggle = document.getElementById('lang-toggle');
-    let currentLang = localStorage.getItem('lang') || 'zh';
+  qrOpeners.forEach((opener) => opener.addEventListener("click", () => qrDialog.showModal()));
+  qrClose.addEventListener("click", () => qrDialog.close());
+  qrDialog.addEventListener("click", (event) => {
+    const rect = qrDialog.getBoundingClientRect();
+    const inside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+    if (!inside) qrDialog.close();
+  });
 
-    function setLanguage(lang) {
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        langToggle.textContent = lang === 'zh' ? '🌐 English' : '🌐 中文';
-        
-        // Update texts
-        const data = translations[lang];
-        for (const [key, value] of Object.entries(data)) {
-            const element = document.getElementById(key);
-            if (element) {
-                if (key.endsWith('list')) {
-                    element.innerHTML = value; // Use innerHTML for lists
-                } else {
-                    element.textContent = value; // Use textContent for plain text
-                }
-            }
-        }
-    }
-
-    // Initialize Language
-    setLanguage(currentLang);
-
-    langToggle.addEventListener('click', () => {
-        setLanguage(currentLang === 'zh' ? 'en' : 'zh');
-    });
-    
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Scroll animations using IntersectionObserver
-    const observerOptions = {
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animation = 'fadeIn 0.8s ease forwards';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.section').forEach(section => {
-        section.style.opacity = '0';
-        observer.observe(section);
-    });
-    
-    // Function to show notifications
-    function showNotification(message) {
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        notification.textContent = message;
-        
-        // Add styles dynamically or through CSS
-        Object.assign(notification.style, {
-            position: 'fixed',
-            bottom: '20px',
-            right: '20px',
-            backgroundColor: 'var(--primary-color)',
-            color: 'white',
-            padding: '12px 24px',
-            borderRadius: '8px',
-            boxShadow: 'var(--shadow-lg)',
-            zIndex: '1000',
-            transition: 'opacity 0.3s ease'
-        });
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            setTimeout(() => notification.remove(), 300);
-        }, 2000);
-    }
-    
-    console.log('CV website loaded successfully!');
+  const observer = "IntersectionObserver" in window
+    ? new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
+      }), { threshold: 0.12 })
+    : null;
+  document.querySelectorAll(".reveal").forEach((element) => observer ? observer.observe(element) : element.classList.add("visible"));
 });
