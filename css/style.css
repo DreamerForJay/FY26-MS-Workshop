@@ -83,3 +83,8 @@ body{background-color:var(--bg);background-image:radial-gradient(ellipse at 12% 
 /* V5: aligned identity assets */
 .education-row{margin:0!important;border:0!important;border-radius:0!important;background:transparent!important}.education-row .community-badge{background:#fff!important}.community-row:first-child{padding-inline:18px}.award-logo{margin:auto;width:150px;display:grid;gap:12px;justify-items:center}.award-logo img{display:block;width:132px;height:132px;object-fit:contain;border-radius:26px;background:#fff;padding:8px;box-shadow:0 15px 40px rgba(0,0,0,.24)}.award-logo span{color:var(--accent);font:700 9px "Space Mono",monospace;letter-spacing:.12em;text-align:center}
 @media(max-width:620px){.community-row:first-child{padding-inline:4px}.award-logo{margin:30px auto 10px}}
+/* V6: lock community logos to one shared baseline */
+.community-row,.community-row:first-child{grid-template-columns:90px minmax(0,1fr) auto!important;padding-inline:18px!important;transform:none!important}
+.community-badge,.education-row .community-badge{margin:0!important;inset:auto!important;justify-self:start!important;align-self:start!important;width:64px;height:64px}
+@media(max-width:760px){.community-row,.community-row:first-child{grid-template-columns:72px minmax(0,1fr)!important;padding-inline:18px!important}.community-badge,.education-row .community-badge{width:56px;height:56px}}
+@media(max-width:620px){.community-row,.community-row:first-child{grid-template-columns:58px minmax(0,1fr)!important;padding-inline:4px!important}.community-badge,.education-row .community-badge{width:48px;height:48px}}

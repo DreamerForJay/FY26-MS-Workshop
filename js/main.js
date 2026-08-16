@@ -29,7 +29,7 @@
       contactTitle:"歡迎交流合作。",qrTitle:"掃描查看所有聯絡方式",qrBody:"用手機相機掃描，或直接點下方連結。"
     },
     en: {
-      available:"OPEN TO COLLABORATION · 2026",surname:"CHIEH-LUN",
+      available:"OPEN TO COLLABORATION · 2026",surname:"楊杰倫",
       headline:"Turning ideas in AI, software, and cross-domain collaboration into products people can use.",
       intro:"Computer Science student at NCUE and Research & Development Intern at TMYTEK, focused on AI applications, software testing, product development, and technical communities.",
       viewExperience:"View experience ↓",contactMe:"Contact me ↗",directoryTitle:"Portfolio directory",navAbout:"About",navExperience:"Experience",navEducation:"Education & community",navProjects:"Selected work",navAvatar:"AI avatar",navContact:"Contact",navAboutSub:"Profile & focus",navExperienceSub:"Industry roles",navEducationSub:"Community & skills",navProjectsSub:"AI & engineering",navAvatarSub:"Interactive profile",navContactSub:"Social & email",
