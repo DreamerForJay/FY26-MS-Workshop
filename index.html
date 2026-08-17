@@ -6,13 +6,14 @@
   <meta name="description" content="楊杰倫 Chieh-Lun Yang — Computer Science, AI, software testing and product innovation portfolio.">
   <meta name="theme-color" content="#0b0718">
   <title>楊杰倫 Chieh-Lun Yang｜Portfolio</title>
-  <link rel="stylesheet" href="css/style.css?v=20260817-2">
+  <link rel="stylesheet" href="css/style.css?v=20260818-1">
   <script type="module" src="https://cdn.perxona.ai/asia/prod/latest/widget/entry/index.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要內容</a>
   <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
   <nav class="command-bar" aria-label="快速連結">
+    <div class="primary-nav"><a href="index.html" aria-current="page">HOME</a><a href="blog.html">BLOG</a></div>
     <a class="icon-link" href="https://github.com/DreamerForJay" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.9c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.55 9.55 0 0 1 12 6.5c.85 0 1.71.11 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v3.09c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
     <a class="icon-link" href="mailto:cl.yang04@gmail.com" aria-label="Email" data-tooltip="Email"><svg viewBox="0 0 24 24"><path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm9 7 8-5H4l8 5Zm0 2.35L3 8.73V17h18V8.73l-9 5.62Z"/></svg></a>
     <a class="icon-link" href="https://www.linkedin.com/in/chieh-lun-yang/" target="_blank" rel="noopener" aria-label="LinkedIn" data-tooltip="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 10h4v11H3V10Zm6.5 0h3.83v1.5h.05c.53-1.01 1.84-2.08 3.78-2.08C21.2 9.42 22 12.08 22 15.54V21h-4v-4.84c0-1.16-.02-2.65-1.72-2.65-1.72 0-1.98 1.26-1.98 2.56V21h-4.8V10Z"/></svg></a>
@@ -26,14 +27,14 @@
   <header class="hero">
     <div class="hero-copy reveal">
       <p class="eyebrow"><span class="status-dot"></span><span data-i18n="available">OPEN TO COLLABORATION · 2026</span></p>
-      <h1><span data-i18n="surname">楊杰倫</span><small>CHIEH-LUN YANG</small></h1>
-      <h2 data-i18n="headline">把 AI、軟體與跨域想法，做成真正能被使用的產品。</h2>
-      <p class="hero-intro" data-i18n="intro">國立彰化師範大學資訊工程學系學生，目前於 TMYTEK 擔任研發實習生。專注 AI 應用、軟體測試、產品開發與技術社群。</p>
+      <div class="hero-name-row"><h1><span data-i18n="surname">楊杰倫</span><small>CHIEH-LUN YANG</small></h1><img class="hero-avatar" src="assets/profile/chieh-lun-yang.jpg" alt="楊杰倫 Chieh-Lun Yang"></div>
+      <h2 data-i18n="headline">把問題弄懂，做出能被使用、也能持續改進的產品。</h2>
+      <p class="hero-intro" data-i18n="intro">資工學生，也是研發實習生。正在累積 AI、軟體測試與產品實作的經驗。</p>
     </div>
-    <div class="signal-card reveal" aria-hidden="true">
-      <div class="signal-grid"></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
-      <div class="monogram">CY</div>
-      <p>AI · SOFTWARE<br>PRODUCT · COMMUNITY</p>
+    <div class="globe-card reveal">
+      <canvas id="globe-canvas" aria-label="Interactive globe centered on Taoyuan, Taiwan"></canvas>
+      <div class="globe-location"><span>TAOYUAN · TAIWAN</span><strong id="taipei-time">--:--:--</strong><small id="taipei-date">----</small></div>
+      <p class="globe-hint">DRAG TO EXPLORE</p>
     </div>
   </header>
 
@@ -140,6 +141,7 @@
       <a href="https://github.com/DreamerForJay" target="_blank" rel="noopener">GitHub ↗</a>
       <a href="https://www.instagram.com/_jay_0919/" target="_blank" rel="noopener">Instagram ↗</a>
       <a href="mailto:cl.yang04@gmail.com">Email ↗</a>
+      <a href="blog.html">Blog ↗</a>
       <button type="button" data-open-qr>Dinq / QR ↗</button>
     </div>
     <div class="footer-bottom"><p>© 2026 楊杰倫 Chieh-Lun Yang</p><p>TAOYUAN · TAIWAN</p></div>
@@ -151,6 +153,7 @@
     <a class="qr-image-link" href="https://dinq.me/clyang" target="_blank" rel="noopener"><img src="assets/clyang-qrcode-2026-08-12.png" alt="dinq.me/clyang QR Code"></a>
     <a class="qr-url" href="https://dinq.me/clyang" target="_blank" rel="noopener">dinq.me/clyang ↗</a>
   </dialog>
-  <script src="js/main.js?v=20260816-1"></script>
+  <script src="js/globe.js?v=20260818-1"></script>
+  <script src="js/main.js?v=20260818-1"></script>
 </body>
 </html>
