@@ -2,54 +2,13 @@
   const canvas = document.querySelector('#globe-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let yaw = -121.301 * Math.PI / 180;
-  let pitch = 24.994 * Math.PI / 180;
-  let dragging = false, lastX = 0, lastY = 0;
-  const points = [];
-  for (let lat = -80; lat <= 80; lat += 10) {
-    for (let lon = -180; lon < 180; lon += 10) points.push([lat * Math.PI / 180, lon * Math.PI / 180]);
-  }
-  const project = (lat, lon, radius, cx, cy) => {
-    const cl = Math.cos(lat), a = lon + yaw;
-    const x = cl * Math.sin(a), y = Math.sin(lat), z = cl * Math.cos(a);
-    const y2 = y * Math.cos(pitch) - z * Math.sin(pitch);
-    const z2 = y * Math.sin(pitch) + z * Math.cos(pitch);
-    return { x: cx + x * radius, y: cy - y2 * radius, z: z2 };
-  };
-  const resize = () => {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * dpr; canvas.height = rect.height * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  };
-  const draw = () => {
-    const w = canvas.clientWidth, h = canvas.clientHeight, r = Math.min(w, h) * .36, cx = w / 2, cy = h / 2;
-    ctx.clearRect(0, 0, w, h);
-    const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#51d8ff';
-    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fillStyle = 'rgba(6,22,36,.82)'; ctx.fill();
-    ctx.strokeStyle = accent; ctx.globalAlpha = .35; ctx.lineWidth = 1.2; ctx.stroke(); ctx.globalAlpha = 1;
-    points.forEach(([lat, lon]) => {
-      const p = project(lat, lon, r, cx, cy); if (p.z < 0) return;
-      const size = 1 + p.z * 1.5; ctx.beginPath(); ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-      ctx.fillStyle = accent; ctx.globalAlpha = .18 + p.z * .6; ctx.fill();
-    });
-    ctx.globalAlpha = 1;
-    const marker = project(24.9937 * Math.PI / 180, 121.301 * Math.PI / 180, r, cx, cy);
-    if (marker.z > 0) {
-      ctx.beginPath(); ctx.arc(marker.x, marker.y, 5, 0, Math.PI * 2); ctx.fillStyle = '#ffb35c'; ctx.fill();
-      ctx.beginPath(); ctx.arc(marker.x, marker.y, 12, 0, Math.PI * 2); ctx.strokeStyle = '#ffb35c'; ctx.globalAlpha = .55; ctx.stroke(); ctx.globalAlpha = 1;
-    }
-    if (!dragging) yaw += .0007;
-    requestAnimationFrame(draw);
-  };
-  canvas.addEventListener('pointerdown', e => { dragging = true; lastX = e.clientX; lastY = e.clientY; canvas.setPointerCapture(e.pointerId); });
-  canvas.addEventListener('pointermove', e => { if (!dragging) return; yaw += (e.clientX-lastX)*.008; pitch = Math.max(-1.2,Math.min(1.2,pitch-(e.clientY-lastY)*.006)); lastX=e.clientX; lastY=e.clientY; });
-  canvas.addEventListener('pointerup', () => dragging = false);
-  canvas.addEventListener('pointercancel', () => dragging = false);
-  const updateClock = () => {
-    const now = new Date();
-    document.querySelector('#taipei-time').textContent = new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);
-    document.querySelector('#taipei-date').textContent = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short'}).format(now).toUpperCase();
-  };
-  resize(); addEventListener('resize', resize); updateClock(); setInterval(updateClock, 1000); draw();
+  let yaw=-121.301*Math.PI/180, pitch=24.994*Math.PI/180, dragging=false, lastX=0, lastY=0, coastlines=[];
+  const toLines=(geometry)=>{if(!geometry)return[];if(geometry.type==='Polygon')return geometry.coordinates;if(geometry.type==='MultiPolygon')return geometry.coordinates.flat();return[];};
+  fetch('assets/data/countries.geo.json').then(r=>r.json()).then(data=>{coastlines=data.features.flatMap(f=>toLines(f.geometry));}).catch(()=>{});
+  const project=(lat,lon,r,cx,cy)=>{const cl=Math.cos(lat),a=lon+yaw,x=cl*Math.sin(a),y=Math.sin(lat),z=cl*Math.cos(a),y2=y*Math.cos(pitch)-z*Math.sin(pitch),z2=y*Math.sin(pitch)+z*Math.cos(pitch);return{x:cx+x*r,y:cy-y2*r,z:z2};};
+  const resize=()=>{const dpr=Math.min(devicePixelRatio||1,2),rect=canvas.getBoundingClientRect();canvas.width=rect.width*dpr;canvas.height=rect.height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);};
+  const strokeLine=(coords,r,cx,cy,color,alpha,width)=>{ctx.beginPath();let drawing=false,prev=null;for(const c of coords){const p=project(c[1]*Math.PI/180,c[0]*Math.PI/180,r,cx,cy);if(p.z<=0){drawing=false;prev=null;continue;}if(!drawing||!prev||Math.hypot(p.x-prev.x,p.y-prev.y)>r*.25){ctx.moveTo(p.x,p.y);drawing=true;}else ctx.lineTo(p.x,p.y);prev=p;}ctx.strokeStyle=color;ctx.globalAlpha=alpha;ctx.lineWidth=width;ctx.stroke();};
+  const draw=()=>{const w=canvas.clientWidth,h=canvas.clientHeight,r=Math.min(w,h)*.37,cx=w/2,cy=h/2,style=getComputedStyle(document.documentElement),accent=style.getPropertyValue('--accent').trim()||'#51d8ff';ctx.clearRect(0,0,w,h);const grad=ctx.createRadialGradient(cx-r*.28,cy-r*.34,r*.08,cx,cy,r);grad.addColorStop(0,'rgba(29,92,113,.9)');grad.addColorStop(.65,'rgba(7,31,49,.96)');grad.addColorStop(1,'rgba(2,10,19,1)');ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();for(let lat=-60;lat<=60;lat+=30){const line=[];for(let lon=-180;lon<=180;lon+=3)line.push([lon,lat]);strokeLine(line,r,cx,cy,accent,.1,.7);}for(let lon=-150;lon<=180;lon+=30){const line=[];for(let lat=-90;lat<=90;lat+=3)line.push([lon,lat]);strokeLine(line,r,cx,cy,accent,.1,.7);}coastlines.forEach(line=>strokeLine(line,r,cx,cy,accent,.7,1.05));ctx.restore();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=accent;ctx.globalAlpha=.45;ctx.lineWidth=1.25;ctx.stroke();ctx.globalAlpha=1;const marker=project(24.9937*Math.PI/180,121.301*Math.PI/180,r,cx,cy);if(marker.z>0){ctx.beginPath();ctx.arc(marker.x,marker.y,4.5,0,Math.PI*2);ctx.fillStyle='#ffb35c';ctx.fill();ctx.beginPath();ctx.arc(marker.x,marker.y,12,0,Math.PI*2);ctx.strokeStyle='#ffb35c';ctx.globalAlpha=.55;ctx.stroke();ctx.globalAlpha=1;}if(!dragging)yaw+=.00045;requestAnimationFrame(draw);};
+  canvas.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!dragging)return;yaw+=(e.clientX-lastX)*.008;pitch=Math.max(-1.2,Math.min(1.2,pitch-(e.clientY-lastY)*.006));lastX=e.clientX;lastY=e.clientY;});canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);
+  const updateClock=()=>{const now=new Date(),time=document.querySelector('#taipei-time'),date=document.querySelector('#taipei-date');if(time)time.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);if(date)date.textContent=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short'}).format(now).toUpperCase();};resize();addEventListener('resize',resize);updateClock();setInterval(updateClock,1000);draw();
 })();
