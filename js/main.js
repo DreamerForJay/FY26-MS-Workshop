@@ -94,4 +94,26 @@
       }), { threshold: 0.12 })
     : null;
   document.querySelectorAll(".reveal").forEach((element) => observer ? observer.observe(element) : element.classList.add("visible"));
+  // Load the below-the-fold avatar SDK only when its section is nearby.
+  const avatarSection = document.querySelector("#avatar");
+  if (avatarSection) {
+    let sdkRequested = false;
+    const loadAvatarSdk = () => {
+      if (sdkRequested) return;
+      sdkRequested = true;
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = "https://cdn.perxona.ai/asia/prod/latest/widget/entry/index.js";
+      document.head.append(script);
+    };
+    if ("IntersectionObserver" in window) {
+      const avatarObserver = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          loadAvatarSdk();
+          avatarObserver.disconnect();
+        }
+      }, { rootMargin: "800px 0px" });
+      avatarObserver.observe(avatarSection);
+    } else loadAvatarSdk();
+  }
 })();

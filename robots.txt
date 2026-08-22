@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dreamerforjay.github.io/FY26-MS-Workshop/sitemap.xml
